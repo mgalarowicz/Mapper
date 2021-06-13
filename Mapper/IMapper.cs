@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Immutable;
-
-namespace Mapper
+﻿namespace Mapper
 {
     public interface IMapper
     {

@@ -11,7 +11,7 @@ namespace Mapper
             var mappers = new Dictionary<Type, IMapper>
             {
                 { typeof(SomeOne), new MapperNumberOne() },
-                { typeof(SomeOneDto), new MapperNumberOne() }
+                { typeof(SomeOneDto), SingletonMapper.GetInstance() }
             };
 
             return mappers.ToImmutableDictionary();

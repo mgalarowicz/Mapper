@@ -8,13 +8,13 @@ namespace Mapper
         {
             return (source, destination) switch
             {
-                (SomeOne src, SomeOneDto dest) => (TDest)(object)MapToSomeOne(src, dest),
+                (SomeOne src, SomeOneDto dest) => (TDest)(object)MapToSomeOneDto(src, dest),
                 
                 _ => throw new Exception("No mapping was found between the specified types")
             };
         }
 
-        private SomeOneDto MapToSomeOne(SomeOne src, SomeOneDto dest)
+        private SomeOneDto MapToSomeOneDto(SomeOne src, SomeOneDto dest)
         {
             throw new NotImplementedException();
         }
