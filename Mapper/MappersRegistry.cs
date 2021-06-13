@@ -6,14 +6,15 @@ namespace Mapper
 {
     public static class MappersRegistry
     {
-        public static IImmutableDictionary<(Type, Type), IConcreteMapper> Initialize()
+        public static IImmutableDictionary<Type, IMapper> Initialize()
         {
-            var dictWithMappers = new Dictionary<(Type, Type), IConcreteMapper>
+            var mappers = new Dictionary<Type, IMapper>
             {
-                { (typeof(SomeOne), typeof(SomeOneDto)), new MapperNumberOne() }
+                { typeof(SomeOne), new MapperNumberOne() },
+                { typeof(SomeOneDto), new MapperNumberOne() }
             };
 
-            return dictWithMappers.ToImmutableDictionary();
+            return mappers.ToImmutableDictionary();
         }
     }
 }

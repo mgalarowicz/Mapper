@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Mapper
 {
-    public class MapperNumberOne : IConcreteMapper
+    internal class MapperNumberOne : IMapper
     {
         public TDest Map<TSource, TDest>(TSource source, TDest destination = null) where TDest : class
         {
@@ -21,5 +18,15 @@ namespace Mapper
         {
             throw new NotImplementedException();
         }
+
+        //private IImmutableDictionary<(Type, Type), Func<object, object, object>> InitializeMappings()
+        //{
+        //    var mappings = new Dictionary<(Type, Type), Func<object, object, object>>
+        //    {
+        //        { (typeof(SomeOne), typeof(SomeOneDto)), (x,y) => (SomeOneDto)(object)MapToSomeOne((SomeOne)x, (SomeOneDto)y)}
+        //    };
+
+        //    return mappings.ToImmutableDictionary();
+        //}
     }
 }

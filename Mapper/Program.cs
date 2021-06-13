@@ -7,8 +7,8 @@ namespace Mapper
 {
     class Program
     {
-        private static readonly SomeOne someOneObj;
-        private static readonly SomeOneDto someOneDtoObj;
+        private static readonly SomeOne someOneObj = new SomeOne();
+        private static readonly SomeOneDto someOneDtoObj = new SomeOneDto();
 
         static void Main(string[] args)
         {
@@ -18,7 +18,7 @@ namespace Mapper
 
     public static class CEMapper
     {
-        private static readonly IImmutableDictionary<(Type, Type), IConcreteMapper> _mappersRegistry;
+        private static readonly IImmutableDictionary<Type, IMapper> _mappersRegistry;
 
         static CEMapper()
         {
@@ -39,9 +39,9 @@ namespace Mapper
 
         public static TDest Map<TSource, TDest>(TSource source, TDest destination = null) where TDest: class
         {
-            var dictKeyType = (typeof(TSource), typeof(TDest));    
+            //var dictKeyType = (typeof(TSource), typeof(TDest));    
 
-            return _mappersRegistry.TryGetValue(dictKeyType, out var concreteMapper) 
+            return _mappersRegistry.TryGetValue(typeof(TSource), out var concreteMapper) 
                 ? concreteMapper.Map<TSource, TDest>(source, destination)
                 : throw new Exception("Bla bla bla no mapper found");
         }
