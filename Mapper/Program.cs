@@ -12,7 +12,7 @@ namespace Mapper
 
         static void Main(string[] args)
         {
-           var mappedObj1 = CEMapper.Map<SomeOneDto, SomeOne>(someOneDtoObj, someOneObj);
+           //var mappedObj1 = CEMapper.Map<SomeOneDto, SomeOne>(someOneDtoObj, someOneObj);
            var mappedObj2 = CEMapper.Map<SomeOne, SomeOneDto>(someOneObj, someOneDtoObj);
         }
     }

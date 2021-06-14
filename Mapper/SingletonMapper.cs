@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 namespace Mapper
 {
-    public class SingletonMapper : IMapper
+    public sealed class SingletonMapper : IMapper
     {
         private static readonly Lazy<SingletonMapper> lazy = new Lazy<SingletonMapper>(() => new SingletonMapper());
 
