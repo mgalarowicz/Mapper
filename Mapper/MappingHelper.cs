@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 namespace Mapper
 {
-    public static class Mapping
+    public static class MappingHelper
     {
         public static void Register<TSource, TDest>(this ConcurrentDictionary<(Type, Type), Func<object, object, object>> mappings, Func<TSource, TDest, TDest> map)
         {

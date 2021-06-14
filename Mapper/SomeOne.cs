@@ -1,6 +1,7 @@
 ﻿namespace Mapper
 {
-    internal class SomeOne
+    internal class SomeOne : IMappableObjectIdentifier
     {
+        public int Id { get; set; }
     }
 }

@@ -5,29 +5,23 @@ namespace Mapper
 {
     public class SingletonMapper : IMapper
     {
-        private static SingletonMapper instance;
-        private ConcurrentDictionary<(Type, Type), Func<object, object, object>> _mappings;
+        private static readonly Lazy<SingletonMapper> lazy = new Lazy<SingletonMapper>(() => new SingletonMapper());
+
+        private static readonly ConcurrentDictionary<(Type, Type), Func<object, object, object>> _mappings = new ConcurrentDictionary<(Type, Type), Func<object, object, object>>();
         
         private SingletonMapper() 
         {
-            _mappings = InitializeMappings();
+            InitializeMappings(_mappings);
         }
 
-        public static SingletonMapper GetInstance() 
-        {   
-            if (instance == null)
-                instance = new SingletonMapper();
-
-            return instance;
-        }
-
-        private ConcurrentDictionary<(Type, Type), Func<object, object, object>> InitializeMappings()
+        private ConcurrentDictionary<(Type, Type), Func<object, object, object>> InitializeMappings(ConcurrentDictionary<(Type, Type), Func<object, object, object>> mappings)
         {
-            var mappings = new ConcurrentDictionary<(Type, Type), Func<object, object, object>>();
-                mappings.Register<SomeOneDto, SomeOne>(MapToSomeOne);
+            mappings.Register<SomeOneDto, SomeOne>(MapToSomeOne);
 
             return mappings;
         }
+
+        public static SingletonMapper Instance => lazy.Value;
 
         public TDest Map<TSource, TDest>(TSource source, TDest destination = null) where TDest : class
         {
@@ -38,8 +32,27 @@ namespace Mapper
 
         private SomeOne MapToSomeOne(SomeOneDto src, SomeOne dest)
         {
-            throw new NotImplementedException();
+            return new SomeOne { Id = 10 };
+        }
+    }
+
+
+
+    //Other thread-safe singleton solution
+    public sealed class Singleton
+    {
+        private static readonly Singleton instance = new Singleton();
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static Singleton()
+        {
         }
 
+        private Singleton()
+        {
+        }
+
+        public static Singleton Instance => instance;
     }
 }
