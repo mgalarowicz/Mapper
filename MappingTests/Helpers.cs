@@ -9,8 +9,11 @@ namespace MappingTests
     {
         public static IMapper InitializeMapper()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<One, OneDto>()
+                    .EqualityComparison((r1, r2) => r1.Id == r2.Id);
+                    cfg.CreateMap<OneDto, One>()
                     .EqualityComparison((r1, r2) => r1.Id == r2.Id);
             });
            
@@ -46,6 +49,17 @@ namespace MappingTests
                 Console.WriteLine("DestID: " + dto.Id);
                 Console.WriteLine("DestName: " + dto.Name);
                 Console.WriteLine("DestCity: " + dto.City);
+                Console.WriteLine();
+            }
+        }
+        
+        public static void WriteLineObjects(IEnumerable<One> ones)
+        {
+            foreach (var one in ones)
+            {
+                Console.WriteLine("DestID: " + one.Id);
+                Console.WriteLine("DestName: " + one.Name);
+                Console.WriteLine("DestCity: " + one.City);
                 Console.WriteLine();
             }
         }
